@@ -4,7 +4,6 @@
 CREATE DATABASE university_db;
 
 
-
 -- Students Table Create   
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
@@ -28,7 +27,6 @@ VALUES
 SELECT * FROM students;
 
 
-
 -- Course Table Create
 CREATE TABLE courses (
     course_id SERIAL PRIMARY KEY,
@@ -46,7 +44,6 @@ VALUES
 SELECT * FROM courses;
 
 
-
 -- Enrollment Table Create 
 CREATE TABLE enrollment (
     enrollment_id SERIAL PRIMARY KEY,
@@ -60,11 +57,9 @@ VALUES (1, 1),(1, 2),(2, 1),(3, 2);
 SELECT * FROM enrollment;
 
 
-
 --Query 1:Insert a new student record with the following details
 INSERT INTO students (student_name, age, email, frontend_mark, backend_mark, status)
 VALUES ('Manik', 22, 'semanik@gmail.com', 55, 68, NULL);
-
 
 
 
@@ -74,7 +69,6 @@ FROM students
 JOIN enrollment ON students.student_id = enrollment.student_id
 JOIN courses ON enrollment.course_id = courses.course_id
 WHERE courses.course_name = 'Next.js';
-
 
 
 
@@ -89,13 +83,11 @@ WHERE student_id = (
 );
 
 
-
 --Query 4:Delete all courses that have no students enrolled.
 DELETE FROM courses
 WHERE course_id NOT IN (
     SELECT DISTINCT course_id FROM enrollment
 );
-
 
 
 --Query 5:Retrieve the names of students using a limit of 2, starting from the 3rd student.
@@ -105,9 +97,12 @@ ORDER BY student_id
 LIMIT 2 OFFSET 2;
 
 
-
 --Query 6:Retrieve the course names and the number of students enrolled in each course.
 SELECT c.course_name, COUNT(e.student_id) AS students_enrolled
 FROM courses c
 LEFT JOIN enrollment e ON c.course_id = e.course_id
 GROUP BY c.course_name;
+
+
+--Query 7:Calculate and display the average age of all students.
+SELECT ROUND(AVG(age), 2) AS average_age FROM students;
