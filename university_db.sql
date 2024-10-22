@@ -54,6 +54,7 @@ CREATE TABLE enrollment (
 INSERT INTO enrollment (student_id, course_id)
 VALUES (1, 1),(1, 2),(2, 1),(3, 2);
 -- Enrollment Table Data Showing
+SELECT * FROM enrollment;
 
 
 
@@ -62,3 +63,19 @@ INSERT INTO students (student_name, age, email, frontend_mark, backend_mark, sta
 VALUES ('Manik', 22, 'semanik@gmail.com', 55, 68, NULL);
 --Query 1: Insert a new student Data Showing
 SELECT * FROM students;
+
+
+
+
+--Query 2:Retrieve the names of all students who are enrolled in the course titled Next.js.
+--Sample Output : Data Showing Right answers
+SELECT student_name
+FROM students
+JOIN enrollment ON students.student_id = enrollment.student_id
+JOIN courses ON enrollment.course_id = courses.course_id
+WHERE courses.course_name = 'Next.js';
+
+
+
+
+
