@@ -1,5 +1,7 @@
 -- Active: 1723122519319@@127.0.0.1@5432@university_db
 
+
+
 -- Students Table Create   
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
@@ -41,6 +43,7 @@ VALUES
 SELECT * FROM courses;
 
 
+
 -- Enrollment Table Create 
 CREATE TABLE enrollment (
     enrollment_id SERIAL PRIMARY KEY,
@@ -51,3 +54,11 @@ CREATE TABLE enrollment (
 INSERT INTO enrollment (student_id, course_id)
 VALUES (1, 1),(1, 2),(2, 1),(3, 2);
 -- Enrollment Table Data Showing
+
+
+
+--Query 1:Insert a new student record with the following details
+INSERT INTO students (student_name, age, email, frontend_mark, backend_mark, status)
+VALUES ('Manik', 22, 'semanik@gmail.com', 55, 68, NULL);
+--Query 1: Insert a new student Data Showing
+SELECT * FROM students;
