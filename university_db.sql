@@ -39,3 +39,15 @@ VALUES
 ('Prisma', 3);
 -- Course Table Data Showing
 SELECT * FROM courses;
+
+
+-- Enrollment Table Create 
+CREATE TABLE enrollment (
+    enrollment_id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(student_id),
+    course_id INTEGER REFERENCES courses(course_id)
+);
+--Enrollment Table Data Insert
+INSERT INTO enrollment (student_id, course_id)
+VALUES (1, 1),(1, 2),(2, 1),(3, 2);
+-- Enrollment Table Data Showing
