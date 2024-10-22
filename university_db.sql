@@ -61,28 +61,42 @@ SELECT * FROM enrollment;
 --Query 1:Insert a new student record with the following details
 INSERT INTO students (student_name, age, email, frontend_mark, backend_mark, status)
 VALUES ('Manik', 22, 'semanik@gmail.com', 55, 68, NULL);
---Query 1: Insert a new student Data Showing
-SELECT * FROM students;
 
 
 
 
 --Query 2:Retrieve the names of all students who are enrolled in the course titled Next.js.
---Sample Output : Data Showing Right answers
 SELECT student_name
 FROM students
 JOIN enrollment ON students.student_id = enrollment.student_id
 JOIN courses ON enrollment.course_id = courses.course_id
 WHERE courses.course_name = 'Next.js';
 
+
+
+
 --Query 3:Update the status of the student with the highest total (frontend_mark + backend_mark) to 'Awarded'.
 UPDATE students
 SET status = 'Awarded'
-WHERE (frontend_mark + backend_mark) = (
-    SELECT MAX(frontend_mark + backend_mark) FROM students
+WHERE student_id = (
+    SELECT student_id
+    FROM students
+    ORDER BY (frontend_mark + backend_mark) DESC
+    LIMIT 1
 );
 
 
 
+--Query 4:Delete all courses that have no students enrolled.
+DELETE FROM courses
+WHERE course_id NOT IN (
+    SELECT DISTINCT course_id FROM enrollment
+);
 
+
+--Query 5:Retrieve the names of students using a limit of 2, starting from the 3rd student.
+SELECT student_name
+FROM students
+ORDER BY student_id
+LIMIT 2 OFFSET 2;
 
